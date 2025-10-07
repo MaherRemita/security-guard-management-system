@@ -1,6 +1,6 @@
 import { Head, usePage } from '@inertiajs/react';
 
-export default function main() {
+export default function Main() {
     const  page  = usePage().props;
     console.log(page);
     return (
