@@ -3,6 +3,8 @@ import { Form, Input, Button, Card, notification, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 export default function Login() {
+    const [form] = Form.useForm();
+
     const { data, setData, post, processing, errors } = useForm({
         email: '',
         password: '',
@@ -12,15 +14,17 @@ export default function Login() {
     const [api, contextHolder] = notification.useNotification();
 
     const onFinish = () => {
-        post('/login', {
-            preserveScroll: true,
-            onError: (error) =>{      
-                api.error({
-                    message: 'Login Failed',
-                    description: error.message || error.password || error.email || 'Please check your input and try again.',
-                    placement: 'bottom',
-                });
-            }
+        form.validateFields().then(() => {
+            post('/login', {
+                preserveScroll: true,
+                onError: (error) =>{      
+                    api.error({
+                        message: 'Login Failed',
+                        description: error.message || error.password || error.email || 'Please check your input and try again.',
+                        placement: 'bottom',
+                    });
+                }
+            });
         });
     };
 

@@ -22,5 +22,6 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     // users routes
     Route::prefix('users')->name('users.')->group(function (){
         Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::post('/create', [UserController::class, 'store'])->name('store');
     });
 });
