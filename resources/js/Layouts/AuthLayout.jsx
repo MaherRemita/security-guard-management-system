@@ -3,7 +3,7 @@ import { router, usePage } from '@inertiajs/react';
 import { MenuFoldOutlined, MenuUnfoldOutlined, DashboardOutlined, TeamOutlined } from '@ant-design/icons';
 import { Layout, Button, Menu } from 'antd';
 import AppLogo from '../Components/AppLogo';
-import UserInfo from '../Components/UserInfo';
+import UserInfo from '../Components/Users/UserInfo';
 
 const { Header, Content, Sider, Footer } = Layout;
 
@@ -71,7 +71,7 @@ export default function AuthLayout ({ children }) {
                 
                 {/* Main Content */}
                 <Layout>
-                    <Content className='m-2 p-2 bg-slate-50 rounded-lg min-h-[280px]'>
+                    <Content className='p-2 bg-slate-50 rounded-lg min-h-[280px]'>
                         {children}
                     </Content>
                 </Layout>

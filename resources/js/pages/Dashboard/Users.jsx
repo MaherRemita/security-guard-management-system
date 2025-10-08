@@ -1,12 +1,25 @@
 import { useState } from 'react';
 import { Head } from '@inertiajs/react';
 import AuthLayout from '@/Layouts/AuthLayout';
-import CreateUserModal from '@/Components/CreateUserModal';
+import CreateUserModal from '@/Components/Users/CreateUserModal';
+import UsersSearch from '@/Components/Users/UsersSearch';
+import UsersTable from '@/Components/Users/UsersTable';
+import useUsers from '@/Hooks/useUsers';
 import { Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
 export default function Users() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const {
+        users,
+        loading,
+        pagination,
+        filters,
+        handleSearch,
+        handleFilterChange,
+        handlePageChange,
+        refreshUsers,
+    } = useUsers();
 
     const showModal = () => {
         setIsModalOpen(true);
@@ -14,18 +27,18 @@ export default function Users() {
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
+        refreshUsers();
     };
 
     return (
         <AuthLayout>
             <Head title="Users" />
             
-            <div className="space-y-2">
+            <div className="space-y-4">
                 {/* Header Section */}
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center m-0 flex-col sm:flex-row gap-4">
                     <div>
                         <h1 className="text-2xl font-bold text-slate-800">Users Management</h1>
-                        <p className="text-slate-600 mt-1">Manage customers and security guards</p>
                     </div>
                     
                     <Button 
@@ -38,10 +51,20 @@ export default function Users() {
                     </Button>
                 </div>
 
-                {/* Table Section - Placeholder */}
-                <div className="bg-white p-6 rounded-lg shadow">
-                    <p className="text-slate-500 text-center">Users table will be displayed here</p>
-                </div>
+                {/* Search and Filter Section */}
+                <UsersSearch
+                    onSearch={handleSearch}
+                    onFilterChange={handleFilterChange}
+                    filters={filters}
+                />
+
+                {/* Users Table Section */}
+                <UsersTable
+                    users={users}
+                    loading={loading}
+                    pagination={pagination}
+                    onPageChange={handlePageChange}
+                />
             </div>
 
             {/* Create User Modal */}
