@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class UserService
 {
@@ -16,4 +17,19 @@ class UserService
         
         return $user;
     }
+
+    // get all with search and filters
+    public function getAll(array $filters = []): LengthAwarePaginator
+    {
+        // search and filter users (exclude admins)
+        $users = User::search($filters['search'] ?? '')
+                        ->whereNotIn('user_type',['ADMIN']) // exclude admins
+                        ->when(isset($filters['user_type']), function ($query) use ($filters) {
+                            $query->where('user_type', $filters['user_type']);
+                        })
+                        ->paginate(15);
+
+        return $users;
+    }
+        
 }

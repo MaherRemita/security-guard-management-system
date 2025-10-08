@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Resources\UserResource;
 use App\Services\UserService;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -44,4 +46,19 @@ class UserController extends Controller
 
     }  
 
+    // show all 
+    public function showAll(Request $request)
+    {
+        // since the validation is simple i will not use for request here and follow the standard validation approach
+        $data = $request->validate([
+            // search
+            'search' => 'string|max:50',
+            // filters
+            'user_type' => 'in:CUSTOMER,GUARD',
+        ]);
+        // get users 
+        $users = $this->userService->getAll($data);
+
+        return UserResource::collection($users);
+    }
 }

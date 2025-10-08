@@ -20,7 +20,7 @@ export default function Users() {
         <AuthLayout>
             <Head title="Users" />
             
-            <div className="space-y-6">
+            <div className="space-y-2">
                 {/* Header Section */}
                 <div className="flex justify-between items-center">
                     <div>

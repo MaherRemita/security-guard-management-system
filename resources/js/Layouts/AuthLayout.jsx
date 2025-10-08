@@ -71,7 +71,7 @@ export default function AuthLayout ({ children }) {
                 
                 {/* Main Content */}
                 <Layout>
-                    <Content className='m-4 p-6 bg-slate-50 rounded-lg min-h-[280px]'>
+                    <Content className='m-2 p-2 bg-slate-50 rounded-lg min-h-[280px]'>
                         {children}
                     </Content>
                 </Layout>
