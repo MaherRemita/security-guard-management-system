@@ -19,12 +19,10 @@ class AuthController extends Controller
     // login (admin)
     public function login(LoginRequest $request): RedirectResponse
     {
-        // get the validated credentials from the request
-        $credentials = $request->validated();
-        // add the user_type condition
-        $credentials['user_type'] = 'ADMIN';
+        $credentials = $request->only('email', 'password');
+        $remember = $request->input('remember');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
  
             return redirect()->intended('/users');

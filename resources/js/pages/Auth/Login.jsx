@@ -1,5 +1,5 @@
 import { Head, useForm } from '@inertiajs/react';
-import { Form, Input, Button, Card, notification } from 'antd';
+import { Form, Input, Button, Card, notification, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 export default function Login() {
@@ -43,6 +43,7 @@ export default function Login() {
                         autoComplete="off"
                         layout="vertical"
                     >
+                        {/* email */}
                         <Form.Item
                             name="email"
                             rules={[
@@ -67,6 +68,7 @@ export default function Login() {
                             />
                         </Form.Item>
 
+                        {/* password */}
                         <Form.Item
                             name="password"
                             rules={[
@@ -87,6 +89,13 @@ export default function Login() {
                             />
                         </Form.Item>
 
+                        {/* remember me */}
+                        <Form.Item name="remember" label={null}>
+                            <Checkbox 
+                            checked={data.remember} onChange={(e) => setData('remember', e.target.checked)}> Remember me </Checkbox>
+                        </Form.Item>
+
+                        {/* login button */}
                         <Form.Item>
                             <Button 
                                 type="primary" 
