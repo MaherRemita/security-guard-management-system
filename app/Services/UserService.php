@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Exception;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -31,5 +32,18 @@ class UserService
 
         return $users;
     }
+    
+    // delete 
+    public function delete(int $id): User
+    {
+        // find user
+        $user = User::find($id);
+        if (!$user) {
+           throw new Exception('User not found');
+        }
+        // delete user
+        $user->delete();
         
+        return  $user;
+    }
 }

@@ -1,7 +1,23 @@
-import { Table, Tag } from 'antd';
-import { UserOutlined, MailOutlined, CalendarOutlined } from '@ant-design/icons';
+import { useState } from 'react';
+import { Table, Tag, Button } from 'antd';
+import { UserOutlined, MailOutlined, CalendarOutlined, DeleteOutlined } from '@ant-design/icons';
+import DeleteUserModal from './DeleteUserModal';
 
 export default function UsersTable({ users, loading, pagination, onPageChange }) {
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null);
+
+    const handleDeleteClick = (user) => {
+        setSelectedUser(user);
+        setIsDeleteModalOpen(true);
+    };
+
+    const handleCloseDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+        setSelectedUser(null);
+        onPageChange();
+    };
+
     const columns = [
         {
             title: 'ID',
@@ -64,10 +80,29 @@ export default function UsersTable({ users, loading, pagination, onPageChange })
             width: 60,
             render: (age) => <span className="font-semibold text-slate-700 text-sm">{age}</span>,
         },
+        {
+            title: 'Actions',
+            key: 'actions',
+            width: 100,
+            fixed: 'right',
+            render: (_, record) => (
+                <Button
+                    type="text"
+                    danger
+                    size="small"
+                    icon={<DeleteOutlined />}
+                    onClick={() => handleDeleteClick(record)}
+                    className="hover:bg-red-50"
+                >
+                    Delete
+                </Button>
+            ),
+        },
     ];
 
     return (
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+        <>
+            <div className="bg-white rounded-lg shadow overflow-hidden">
             <div className="overflow-x-auto">
                 <Table
                     columns={columns}
@@ -102,5 +137,15 @@ export default function UsersTable({ users, loading, pagination, onPageChange })
                 />
             </div>
         </div>
+
+            {/* Delete User Modal */}
+            {selectedUser && (
+                <DeleteUserModal
+                    user={selectedUser}
+                    open={isDeleteModalOpen}
+                    onClose={handleCloseDeleteModal}
+                />
+            )}
+        </>
     );
 }
