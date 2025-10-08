@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import { Layout, Button } from 'antd';
+import { router, usePage } from '@inertiajs/react';
+import { MenuFoldOutlined, MenuUnfoldOutlined, DashboardOutlined, TeamOutlined, SettingOutlined } from '@ant-design/icons';
+import { Layout, Button, Menu } from 'antd';
 import AppLogo from '../Components/AppLogo';
 import UserInfo from '../Components/UserInfo';
 
@@ -9,6 +10,34 @@ const { Header, Content, Sider, Footer } = Layout;
 export default function AuthLayout ({ children }) {
     // State to manage sidebar collapse
     const [collapsed, setCollapsed] = useState(false);
+    const { url } = usePage();
+
+    const menuItems = [
+        { 
+            label: 'Dashboard', 
+            key: 'dashboard', 
+            icon: <DashboardOutlined /> 
+        },
+        { 
+            label: 'Users', 
+            key: 'users', 
+            icon: <TeamOutlined /> 
+        },
+        { 
+            label: 'Settings', 
+            key: 'settings', 
+            icon: <SettingOutlined /> 
+        },
+    ];
+
+    const getSelectedKey = () => {
+        const currentRoute = url;
+        return currentRoute.replace('/', '') || 'dashboard';
+    };
+
+    const handleMenuClick = (item) => {
+        router.visit('/'+item.key);
+    };
 
     return (
         <Layout className='!min-h-screen'>
@@ -27,6 +56,15 @@ export default function AuthLayout ({ children }) {
                     trigger={null}
                     className='!bg-slate-800'
                 >
+                    <Menu 
+                        theme="dark" 
+                        selectedKeys={[getSelectedKey()]} 
+                        mode="inline" 
+                        items={menuItems} 
+                        className='h-full' 
+                        onClick={handleMenuClick}
+                    />
+                    
                     <Button
                         type="text"
                         icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
