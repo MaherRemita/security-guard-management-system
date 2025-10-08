@@ -6,4 +6,28 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    
+    /* Color Variables for Security Guard Management System */
+    --color-primary: #1e40af;        /* Primary Blue - Main brand color */
+    --color-primary-dark: #1e3a8a;   /* Darker blue for hover states */
+    --color-primary-light: #3b82f6;  /* Lighter blue for backgrounds */
+    --color-secondary: #64748b;      /* Slate gray for secondary elements */
+    --color-accent: #0ea5e9;         /* Sky blue for accents */
+    
+    /* Background Colors */
+    --color-bg-main: #f8fafc;        /* Light background */
+    --color-bg-white: #ffffff;       /* Pure white */
+    --color-bg-sidebar: #1e293b;     /* Dark sidebar background */
+    --color-bg-header: #0f172a;      /* Darker header background */
+    
+    /* Text Colors */
+    --color-text-primary: #1e293b;   /* Dark text */
+    --color-text-secondary: #64748b; /* Gray text */
+    --color-text-white: #ffffff;     /* White text */
+    --color-text-muted: #94a3b8;     /* Muted text */
+    
+    /* Border Colors */
+    --color-border: #e2e8f0;         /* Light border */
+    --color-border-dark: #cbd5e1;    /* Darker border */
 }
+
