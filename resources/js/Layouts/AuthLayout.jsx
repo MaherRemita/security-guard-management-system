@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { router, usePage } from '@inertiajs/react';
-import { MenuFoldOutlined, MenuUnfoldOutlined, DashboardOutlined, TeamOutlined, SettingOutlined } from '@ant-design/icons';
+import { MenuFoldOutlined, MenuUnfoldOutlined, DashboardOutlined, TeamOutlined } from '@ant-design/icons';
 import { Layout, Button, Menu } from 'antd';
 import AppLogo from '../Components/AppLogo';
 import UserInfo from '../Components/UserInfo';
@@ -15,28 +15,24 @@ export default function AuthLayout ({ children }) {
     const menuItems = [
         { 
             label: 'Dashboard', 
-            key: 'dashboard', 
+            key: '/admin/dashboard', 
             icon: <DashboardOutlined /> 
         },
         { 
             label: 'Users', 
-            key: 'users', 
+            key: '/admin/users', 
             icon: <TeamOutlined /> 
-        },
-        { 
-            label: 'Settings', 
-            key: 'settings', 
-            icon: <SettingOutlined /> 
+
         },
     ];
 
     const getSelectedKey = () => {
         const currentRoute = url;
-        return currentRoute.replace('/', '') || 'dashboard';
+        return currentRoute || '/dashboard';
     };
 
     const handleMenuClick = (item) => {
-        router.visit('/'+item.key);
+        router.visit(item.key);
     };
 
     return (

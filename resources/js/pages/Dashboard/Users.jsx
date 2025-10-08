@@ -1,4 +1,4 @@
-import { Head, usePage } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import AuthLayout from '@/Layouts/AuthLayout';
 
 export default function Users() {
