@@ -81,4 +81,10 @@ class UserController extends Controller
                 ->withErrors(['message' => $e->getMessage()]);
         }
     }
+
+    // pairs of users whose ages sum to the given number
+    public function findPairsByAgeSum($sum): array
+    {
+        return $this->userService->findPairsByAgeSum((int)$sum);
+    }
 }

@@ -50,6 +50,12 @@ class User extends Authenticatable
         ];
     }
 
+    // age attribute
+    public function getAgeAttribute(): int
+    {
+        return $this->date_of_birth->age;
+    }
+
     public function toSearchableArray(): array
     {
         return [
