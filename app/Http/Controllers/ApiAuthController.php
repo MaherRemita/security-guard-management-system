@@ -35,7 +35,7 @@ class ApiAuthController extends Controller
         $user = Auth::user();
         // revoke token
         $user->currentAccessToken()->delete();
-        
+
         return response()->json(['message' => 'Logged out successfully'],200);
     }
 }
