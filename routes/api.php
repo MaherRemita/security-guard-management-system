@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ApiAuthController;
 
 // Part 1 apis
 Route::middleware(['web', 'auth'])->group(function () {
@@ -14,3 +15,11 @@ Route::middleware(['web', 'auth'])->group(function () {
 
 
 // Part 2 apis
+
+// login
+Route::post('/login', [ApiAuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function (){
+    // logout
+    Route::post('/logout', [ApiAuthController::class, 'logout']);
+});
