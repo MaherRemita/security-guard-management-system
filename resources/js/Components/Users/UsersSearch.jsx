@@ -1,12 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Input, Select, Button } from 'antd';
 import { SearchOutlined, TeamOutlined } from '@ant-design/icons';
 import UserPairsModal from './UserPairsModal';
 
-const { Search } = Input;
-
 export default function UsersSearch({ onSearch, onFilterChange, filters }) {
     const [isPairsModalOpen, setIsPairsModalOpen] = useState(false);
+    const [searchValue, setSearchValue] = useState(filters.search || '');
+
+    useEffect(() => {
+        // Debounce: wait 500ms after user stops typing
+        const debounceTimer = setTimeout(() => {
+            onSearch(searchValue);
+        }, 300);
+
+        // Cleanup: cancel the timer if searchValue changes before 500ms
+        return () => clearTimeout(debounceTimer);
+    }, [searchValue]);
 
     const showPairsModal = () => {
         setIsPairsModalOpen(true);
@@ -25,18 +34,13 @@ export default function UsersSearch({ onSearch, onFilterChange, filters }) {
                         <label className="block text-sm font-medium text-slate-700 mb-2">
                             Search Users
                         </label>
-                        <Search
+                        <Input
                             placeholder="Search by name or email..."
                             allowClear
                             size="large"
                             prefix={<SearchOutlined />}
-                            onSearch={onSearch}
-                            onChange={(e) => {
-                                if (e.target.value === '') {
-                                    onSearch('');
-                                }
-                            }}
-                            defaultValue={filters.search}
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
                         />
                     </div>
 
