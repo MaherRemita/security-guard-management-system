@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\MissionController;
 
-// Part 1 apis
+// Part 1 rotes
 Route::middleware(['web', 'auth'])->group(function () {
     // list all users api
     Route::get('/users', [UserController::class, 'showAll']);
@@ -14,7 +15,7 @@ Route::middleware(['web', 'auth'])->group(function () {
 });
 
 
-// Part 2 apis
+// Part 2 rotes
 
 // login
 Route::post('/login', [ApiAuthController::class, 'login']);
@@ -22,4 +23,10 @@ Route::post('/login', [ApiAuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function (){
     // logout
     Route::post('/logout', [ApiAuthController::class, 'logout']);
+
+    // customers routes
+    Route::middleware('role:CUSTOMER')->group(function () {
+        // missions CRUD routes
+        Route::apiResource('missions', MissionController::class);
+    });
 });

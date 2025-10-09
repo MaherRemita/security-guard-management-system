@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -55,6 +56,12 @@ class User extends Authenticatable
     public function getAgeAttribute(): int
     {
         return $this->date_of_birth->age;
+    }
+
+    // missions relation
+    public function missions(): HasMany
+    {
+        return $this->hasMany(Mission::class, 'customer_id');
     }
 
     public function toSearchableArray(): array
