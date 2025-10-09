@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\Request;
 use App\Services\UserService;
+use Illuminate\Http\JsonResponse;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\User\StoreUserRequest;
@@ -83,8 +84,14 @@ class UserController extends Controller
     }
 
     // pairs of users whose ages sum to the given number
-    public function findPairsByAgeSum($sum): array
+    public function findPairsByAgeSum($sum): JsonResponse
     {
-        return $this->userService->findPairsByAgeSum((int)$sum);
+        return response()->json($this->userService->findPairsByAgeSum((int)$sum),200);
+    }
+
+    // age distribution
+    public function ageDistribution(): JsonResponse
+    {
+        return response()->json($this->userService->getAgeDistribution(),200);
     }
 }

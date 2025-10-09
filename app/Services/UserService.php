@@ -5,6 +5,7 @@ namespace App\Services;
 use Exception;
 use Carbon\Carbon;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use App\Http\Resources\UserResource;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -93,5 +94,29 @@ class UserService
             'pairs_count' => count($pairs),
             'pairs' => $pairs
         ];
+    }
+
+    public function getAgeDistribution(): array
+    {
+
+        // get the ragnes using sql istead of php (for performance)
+        $distribution = DB::table('users')
+            ->select(
+                DB::raw("
+                    CASE 
+                        WHEN TIMESTAMPDIFF(YEAR, date_of_birth, NOW()) BETWEEN 15 AND 30 THEN '15-30'
+                        WHEN TIMESTAMPDIFF(YEAR, date_of_birth, NOW()) BETWEEN 31 AND 45 THEN '31-45'
+                        WHEN TIMESTAMPDIFF(YEAR, date_of_birth, NOW()) BETWEEN 46 AND 60 THEN '46-60'
+                        WHEN TIMESTAMPDIFF(YEAR, date_of_birth, NOW()) >= 61 THEN '61+'
+                    END as age_range
+                "),
+                DB::raw('COUNT(*) as count')
+            )
+            ->whereNotNull('date_of_birth')
+            ->groupBy('age_range')
+            ->get();
+        
+        // return the result sorted by the age range
+        return $distribution->sortBy('age_range')->values()->toArray(); 
     }
 }

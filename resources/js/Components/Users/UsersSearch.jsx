@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Input, Select, Button } from 'antd';
-import { SearchOutlined, TeamOutlined } from '@ant-design/icons';
+import { SearchOutlined, TeamOutlined, BarChartOutlined } from '@ant-design/icons';
 import UserPairsModal from './UserPairsModal';
+import AgeDistributionModal from './AgeDistributionModal';
 
 export default function UsersSearch({ onSearch, onFilterChange, filters }) {
     const [isPairsModalOpen, setIsPairsModalOpen] = useState(false);
+    const [isDistributionModalOpen, setIsDistributionModalOpen] = useState(false);
     const [searchValue, setSearchValue] = useState(filters.search || '');
 
     useEffect(() => {
@@ -25,10 +27,18 @@ export default function UsersSearch({ onSearch, onFilterChange, filters }) {
         setIsPairsModalOpen(false);
     };
 
+    const showDistributionModal = () => {
+        setIsDistributionModalOpen(true);
+    };
+
+    const handleCloseDistributionModal = () => {
+        setIsDistributionModalOpen(false);
+    };
+
     return (
         <>
             <div className="bg-white p-4 rounded-lg shadow mb-4">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {/* Search Input */}
                     <div>
                         <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -74,7 +84,23 @@ export default function UsersSearch({ onSearch, onFilterChange, filters }) {
                             onClick={showPairsModal}
                             className="w-full"
                         >
-                            Find User Pairs by Age
+                            Find Pairs
+                        </Button>
+                    </div>
+
+                    {/* Age Distribution Button */}
+                    <div>
+                        <label className="block text-sm font-medium text-slate-700 mb-2">
+                            Statistics
+                        </label>
+                        <Button
+                            type="default"
+                            size="large"
+                            icon={<BarChartOutlined />}
+                            onClick={showDistributionModal}
+                            className="w-full"
+                        >
+                            Age Distribution
                         </Button>
                     </div>
                 </div>
@@ -84,6 +110,12 @@ export default function UsersSearch({ onSearch, onFilterChange, filters }) {
             <UserPairsModal
                 open={isPairsModalOpen}
                 onClose={handleClosePairsModal}
+            />
+
+            {/* Age Distribution Modal */}
+            <AgeDistributionModal
+                open={isDistributionModalOpen}
+                onClose={handleCloseDistributionModal}
             />
         </>
     );
