@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\UserController;
 
-
+// Part 1 apis
 Route::middleware(['web', 'auth'])->group(function () {
     // list all users api
     Route::get('/users', [UserController::class, 'showAll']);
@@ -12,3 +12,5 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/age-distribution', [UserController::class, 'ageDistribution']);
 });
 
+
+// Part 2 apis
