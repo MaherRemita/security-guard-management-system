@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -37,6 +38,14 @@ class GuardGroup extends Model
     public function timeSlots(): HasMany
     {
         return $this->hasMany(TimeSlot::class);
+    }
+
+    // shifts relation
+    public function shifts(): HasManyThrough
+    {
+        return $this->hasManyThrough(Shift::class, TimeSlot::class);
+                    // ->where('time_slots.start_at', '<=', now())
+                    // ->where('time_slots.end_at', '>=', now());
     }
 
     public function toSearchableArray(): array

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TimeSlot extends Model
 {
@@ -42,5 +43,11 @@ class TimeSlot extends Model
     {
         return $this->belongsTo(GuardGroup::class)
                     ->select(['id', 'name']); // select only id and name for performance
+    }
+
+    // shifts relation
+    public function shifts(): HasMany
+    {
+        return $this->hasMany(Shift::class);
     }
 }

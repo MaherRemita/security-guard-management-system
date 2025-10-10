@@ -58,10 +58,16 @@ class User extends Authenticatable
         return $this->date_of_birth->age;
     }
 
-    // missions relation
+    // missions relation (for customers)
     public function missions(): HasMany
     {
         return $this->hasMany(Mission::class, 'customer_id');
+    }
+
+    // shifts relation (for guards)
+    public function shifts(): HasMany
+    {
+        return $this->hasMany(Shift::class, 'guard_id');
     }
 
     public function toSearchableArray(): array

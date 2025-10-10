@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\MissionController;
 use App\Http\Controllers\TimeSlotController;
@@ -39,4 +40,11 @@ Route::middleware('auth:sanctum')->group(function (){
         Route::apiResource('guard-groups.time-slots', TimeSlotController::class)->shallow();
     });
 
+    // guard routes
+    Route::middleware('role:GUARD')->group(function () {
+        // time slots routes
+        Route::apiResource('guard-groups.time-slots', TimeSlotController::class)->only(['index', 'show'])->shallow();
+        // shifts routes
+        Route::apiResource('shifts', ShiftController::class)->only(['index', 'show', 'store', 'destroy']);
+    });
 });
