@@ -8,7 +8,7 @@ This project is a technical assessment demonstrating full-stack development skil
 
 <div align="center">
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-4CAF50?style=for-the-badge&logo=vercel&logoColor=white)](https://your-live-demo-url.com)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-4CAF50?style=for-the-badge&logo=vercel&logoColor=white)](http://34.40.93.77:82)
 [![Postman Workspace](https://img.shields.io/badge/📮_Postman_Workspace-FF6C37?style=for-the-badge&logo=postman&logoColor=white)](https://www.postman.com/planetary-spaceship-939256/guard-management-system/overview)
 
 </div>
