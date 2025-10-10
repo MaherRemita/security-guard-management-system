@@ -24,6 +24,19 @@ class TimeSlot extends Model
         'end_time' => 'datetime:H:i',
     ];
 
+    // status attribute
+    public function getStatusAttribute(): string
+    {
+        $now = now();
+        if ($this->end_date->isBefore($now)) {
+            return 'past';
+        } elseif ($this->start_date->isAfter($now)) {
+            return 'upcoming';
+        } else {
+            return 'ongoing';
+        }
+    }
+
     // guard group relation
     public function guardGroup(): BelongsTo
     {

@@ -21,6 +21,7 @@ class TimeSlotResource extends JsonResource
             'end_date' => $this->end_date->isoFormat('D MMMM YYYY'),
             'start_time' => $this->start_time->format('H:i'),
             'end_time' => $this->end_time->format('H:i'),
+            'status' => $this->status,
             'created_at' => $this->created_at->isoFormat('D MMMM YYYY'),
         ];
     }
