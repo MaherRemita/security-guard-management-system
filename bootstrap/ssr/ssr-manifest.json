@@ -1,0 +1,19 @@
+{
+  "resources/js/Components/AppLogo.jsx": [],
+  "resources/js/Components/Users/AgeDistributionModal.jsx": [],
+  "resources/js/Components/Users/CreateUserModal.jsx": [],
+  "resources/js/Components/Users/DeleteUserModal.jsx": [],
+  "resources/js/Components/Users/UserInfo.jsx": [],
+  "resources/js/Components/Users/UserPairsModal.jsx": [],
+  "resources/js/Components/Users/UsersSearch.jsx": [],
+  "resources/js/Components/Users/UsersTable.jsx": [],
+  "resources/js/Hooks/useAgeDistribution.js": [],
+  "resources/js/Hooks/useUserPairs.js": [],
+  "resources/js/Hooks/useUsers.js": [],
+  "resources/js/Layouts/AuthLayout.jsx": [],
+  "resources/js/Pages/Auth/Login.jsx": [],
+  "resources/js/Pages/Dashboard/Index.jsx": [],
+  "resources/js/Pages/Dashboard/Settings.jsx": [],
+  "resources/js/Pages/Dashboard/Users.jsx": [],
+  "resources/js/ssr.jsx": []
+}
