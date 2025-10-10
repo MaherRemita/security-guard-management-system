@@ -3,8 +3,9 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\MissionController;
-use App\Http\Controllers\ProfessionController;
+use App\Http\Controllers\TimeSlotController;
 use App\Http\Controllers\GuardGroupController;
+use App\Http\Controllers\ProfessionController;
 
 // Part 1 rotes
 Route::middleware(['web', 'auth'])->group(function () {
@@ -34,6 +35,8 @@ Route::middleware('auth:sanctum')->group(function (){
         Route::apiResource('professions', ProfessionController::class);
         // guard groups CRUD routes
         Route::apiResource('guard-groups', GuardGroupController::class);
+        // time slots CRUD routes
+        Route::apiResource('guard-groups.time-slots', TimeSlotController::class)->shallow();
     });
 
 });

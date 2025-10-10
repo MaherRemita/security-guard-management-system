@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class GuardGroup extends Model
 {
@@ -30,6 +31,12 @@ class GuardGroup extends Model
     {
         return $this->belongsTo(Profession::class, 'profession_id')
                     ->select(['id','name']); // select only id and name for performance
+    }
+
+    // time slots relation
+    public function timeSlots(): HasMany
+    {
+        return $this->hasMany(TimeSlot::class);
     }
 
     public function toSearchableArray(): array

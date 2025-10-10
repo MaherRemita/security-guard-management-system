@@ -10,7 +10,7 @@ class GuardGroupService
     // get all guard groups
     public function getAll(array $data): LengthAwarePaginator
     {
-        // get guard groups with eager loading
+        // get guard group
         $guardGroups = GuardGroup::search($data['search'] ?? '')->paginate(10);
 
         // eager load mission and profession
