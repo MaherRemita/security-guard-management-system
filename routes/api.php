@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\MissionController;
+use App\Http\Controllers\ProfessionController;
 
 // Part 1 rotes
 Route::middleware(['web', 'auth'])->group(function () {
@@ -28,5 +29,8 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::middleware('role:CUSTOMER')->group(function () {
         // missions CRUD routes
         Route::apiResource('missions', MissionController::class);
+        // professions CRUD routes
+        Route::apiResource('professions', ProfessionController::class);
     });
+
 });
