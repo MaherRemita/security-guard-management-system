@@ -41,7 +41,6 @@ A mission booking API following REST principles with Sanctum authentication. Inc
 1. Clone the repository
 ```bash
 git clone https://github.com/MaherRemita/security-guard-management-system.git
-cd security-guard-management-system
 ```
 
 2. Install PHP dependencies
@@ -54,34 +53,9 @@ composer install
 npm install
 ```
 
-4. Create environment file
+4. Run migrations and seeder
 ```bash
-cp .env.example .env
-```
-
-5. Configure database in `.env` file
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=security_guard_db
-DB_USERNAME=your_username
-DB_PASSWORD=your_password
-```
-
-6. Generate application key
-```bash
-php artisan key:generate
-```
-
-7. Run migrations
-```bash
-php artisan migrate
-```
-
-8. Seed the database (optional)
-```bash
-php artisan db:seed
+php artisan migrate --seed
 ```
 
 9. Build frontend assets
@@ -101,8 +75,6 @@ The application will be available at `http://localhost:8000`
 Email: maher@admin.com
 Password: password
 ```
-*(Update these if you seeded with different credentials)*
-
 ---
 
 ## Design Patterns
