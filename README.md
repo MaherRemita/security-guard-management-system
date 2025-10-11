@@ -58,11 +58,11 @@ npm install
 php artisan migrate --seed
 ```
 
-9. Build frontend assets
+5. Build frontend assets
 ```bash
 npm run build
 ```
-10. Start the development servers
+6. Start the development servers
 ```bash
 php artisan dev
 ```
